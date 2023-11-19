@@ -6,9 +6,21 @@ const cors = require('cors')
 // 8XbaaY73kkorDNZg dbpass
 // hellodbuser dbname
 
-app.use(cors())
-app.use(express.json())
+// app.use(cors())
 
+
+const fileUpload = require('express-fileupload')
+
+// middleware
+const corsConfig = {
+  origin: '*',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}
+app.use(cors(corsConfig))
+app.options("*", cors(corsConfig))
+app.use(express.json())
+app.use(fileUpload())
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
