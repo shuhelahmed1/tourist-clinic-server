@@ -1,8 +1,13 @@
 const express = require('express')
+require('dotenv').config();
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
+const cors = require('cors')
 // 8XbaaY73kkorDNZg dbpass
 // hellodbuser dbname
+
+app.use(cors())
+app.use(express.json())
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -35,7 +40,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
   // import { MongoClient } from "mongodb";
 
 // Replace the uri string with your MongoDB deployment's connection string.
-const uri = "mongodb+srv://hellodbuser:8XbaaY73kkorDNZg@cluster0.ypbjopw.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ypbjopw.mongodb.net/?retryWrites=true&w=majority`
 
 // Create a new client and connect to MongoDB
 const client = new MongoClient(uri);
@@ -46,16 +51,14 @@ async function run() {
     const database = client.db("tourist-clinic");
     const hotelsCollection = database.collection("hotels");
     
-    // Create a document to insert
-    const hotel = {'name': 'Sylhet BlueWater', 'address': 'Zindabazar'}
-    // Insert the defined document into the "haiku" collection
-    const result = await hotelsCollection.insertOne(hotel);
-
-    // Print the ID of the inserted document
-    console.log(`A document was inserted with the _id: ${result.insertedId}`);
+    app.post('/addhotels', async(req,res)=>{
+      const newHotel = req.body;
+      const result = await hotelsCollection.insertOne(newHotel)
+      res.json(result)
+    })
   } finally {
      // Close the MongoDB client connection
-    await client.close();
+    // await client.close();
   }
 }
 // Run the function and handle any errors
