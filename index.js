@@ -9,7 +9,6 @@ const cors = require('cors')
 // app.use(cors())
 
 
-const fileUpload = require('express-fileupload')
 
 // middleware
 const corsConfig = {
@@ -20,8 +19,6 @@ const corsConfig = {
 app.use(cors(corsConfig))
 app.options("*", cors(corsConfig))
 app.use(express.json())
-app.use(fileUpload())
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 // // Create a MongoClient with a MongoClientOptions object to set the Stable API version
