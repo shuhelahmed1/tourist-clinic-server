@@ -13,7 +13,7 @@ const cors = require('cors')
 //    optionSuccessStatus:200,
 // }
 
-app.use(cors({credentials: true, origin:'https://tourist-clinic-server2.vercel.app'}))
+app.use(cors({credentials: true, origin:'http://localhost:3000'}))
 
 app.use(express.json())
 const { MongoClient, ServerApiVersion } = require('mongodb');
