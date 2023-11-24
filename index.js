@@ -3,8 +3,6 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 const cors = require('cors')
-// 8XbaaY73kkorDNZg dbpass
-// hellodbuser dbname
 
 // app.use(cors())
 
