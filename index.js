@@ -10,7 +10,8 @@ app.use(
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   })
-  );app.use(express.json())
+  );
+  app.use(express.json())
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
 // // Create a MongoClient with a MongoClientOptions object to set the Stable API version
