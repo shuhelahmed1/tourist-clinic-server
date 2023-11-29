@@ -14,33 +14,6 @@ app.use(
   app.use(express.json())
 const { MongoClient, ServerApiVersion } = require('mongodb');
 
-// // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-// const client = new MongoClient(uri, {
-//   serverApi: {
-//     version: ServerApiVersion.v1,
-//     strict: true,
-//     deprecationErrors: true,
-//   }
-// });
-
-// async function run() {
-//     try {
-//       await client.connect();
-//       const database = client.db("");
-//       const hotelsCollection = database.collection("");
-//       const hotel = {'name': 'Dhaka Radison', 'address': 'Gulshan'}
-//       hotelsCollection.insertOne(hotel)
-       
-       
-  
-//     } finally {
-//       // await client.close();
-//     }
-//   }
-//   run().catch(console.dir);
-
-  // import { MongoClient } from "mongodb";
-
 // Replace the uri string with your MongoDB deployment's connection string.
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ypbjopw.mongodb.net/?retryWrites=true&w=majority`
 
@@ -53,9 +26,17 @@ async function run() {
     const database = client.db("tourist-clinic");
     const hotelsCollection = database.collection("hotels");
     
+    // post api hotels
     app.post('/addhotels', async(req,res)=>{
       const newHotel = req.body;
       const result = await hotelsCollection.insertOne(newHotel)
+      res.json(result)
+    })
+
+    // get api hotels
+    app.get('/review', async(req,res)=>{
+      const cursor = hotelsCollection.find({});
+      const result = await cursor.toArray();
       res.json(result)
     })
   } finally {
