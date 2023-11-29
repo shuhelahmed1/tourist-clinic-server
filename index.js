@@ -34,7 +34,7 @@ async function run() {
     })
 
     // get api hotels
-    app.get('/review', async(req,res)=>{
+    app.get('/hotels', async(req,res)=>{
       const cursor = hotelsCollection.find({});
       const result = await cursor.toArray();
       res.json(result)
