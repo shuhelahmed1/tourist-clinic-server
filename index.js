@@ -28,7 +28,17 @@ async function run() {
     
     // post api hotels
     app.post('/addhotels', async(req,res)=>{
-      const newHotel = req.body;
+      const name = req.body.name;
+      const des = req.body.des;
+      const pic = req.files.image;
+      const picData = pic.data;
+      const encodedPic = picData.toString('base64')
+      const imageBuffer = Buffer.from(encodedPic, 'base64')
+      const newHotel = {
+        name,
+        des,
+        image: imageBuffer
+      }
       const result = await hotelsCollection.insertOne(newHotel)
       res.json(result)
     })
