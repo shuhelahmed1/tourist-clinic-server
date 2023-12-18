@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000;
 const cors=require("cors");
 
 app.use(cors({
-  origin: 'https://tourist-clinic.web.app'
+  origin: "https://tourist-clinic.web.app"
 })) 
 app.use(express.json())
 const { MongoClient, ServerApiVersion } = require('mongodb');
